@@ -91,6 +91,7 @@ Integer overflow: make signed integer wrap and become negative usually violate a
 - %s likely crash program
 - %x dump the stack
 - %n write to an address on stack
+
 ### Incomplete mediation
 - occurs when application accepts incorrect data from the user
 - make sure user-supplied input falls within well-specified values, known to be safe
@@ -212,6 +213,7 @@ learn information about what the computer is doing by looking at:
 - Testing
 - Documentation
 - Maintenance
+
 ### Security control in Design
 - Modularity
   - break problem into small pieces
@@ -230,6 +232,7 @@ learn information about what the computer is doing by looking at:
   - defence against flaws or malicious behavior on other modules
 - Confinement
   - confine potentially untrustworthy module first
+
 ### Security control in Implementation
 - Don't use C
 - Static code analysis
@@ -240,6 +243,7 @@ learn information about what the computer is doing by looking at:
 - Genetic diversity
   - many machines running the same vulnerable code
   - different HTTP server will mitigate attack
+
 ### Security control in Change management
 - track changes to either the source code or the configuration information (Version Control)
 
