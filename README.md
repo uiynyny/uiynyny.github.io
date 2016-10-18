@@ -358,4 +358,62 @@ Memory protection is part of translation form virutal to physical address (MMU)
   - unforgeable token gives owner some access right to an object
   - enforced by OS store and maintain tokens or cryptographic
   - token are transferable
-  - combined usage of ACL and cap.
+  - combined usage of ACL and cap. (problem with this approach)
+- RBAC
+  - depend on user's job function
+  - admin assigns user to roles and grant access right to role
+  - update only her role assignment
+  - Hierarchical role
+    - user can have multiple roles
+    - reduce number of role/access rights
+  - Separation of Duty
+    - "payment need to be signed by both manager and accounting where can not be the same person"
+
+## User authentication
+Computer identify and authenticate user before authorizing them
+
+- Authentication factor
+  - user knows
+    - password, PIN, secret question
+  - user has
+    - bank card, badge, cookie, keys, phone
+  - user is
+    - biometric (fingerprint, voice, face)
+  - user's context
+    - location, time, devices
+
+Different classes of authentication factors can be combined
+
+- password
+  attack by shoulder surfing, key logging, phishing,re-use across sites and guessing
+  - brute force (exhaustive search) exponential
+  - attacker has encrypted password or document (offline attack)
+  - attacker try log in your bank (online attack) detectable and lockout can bypass (API, other website)
+  - defend
+    - use letters, numbers and special characters > 8 passwords
+    - write down on paper keep it close
+    - change regularly (avoid repeat or patterns)
+    - don't reveal password
+    - site-specific password
+    - avoid public computer log in
+    - store fingerprints only (cryptographic hash) UNIX salt
+    - user iterated hash that is expensive to compute (bcrypt) or lots of memory (scrypt)
+    - MAC mix in secret key to compute fingerprint
+  - recovery
+    - store encrypted version of password in file
+    - easy to re-compute a password
+- interception attack
+  - intercepts apssword while in transmission from client to server
+    - use Fobs or challenge-response protocols
+  - use encryption protect against interception attack on network
+- graphical password
+- server authentication
+  - CTRL ALT DELETE for login, key combination cannot be orverridden (phishing)
+- Biometric
+  - based on physical characteristic if trait is sufficiently close will accept
+  - work well on local authentication, less for remote (photo, gelatin fingerprint)
+
+### Authentication vs. identification
+- Authentication: trait correspond to a particular trait
+- Identification: trait correspond to any stored trait
+- False positive make biometric-based identification useless
