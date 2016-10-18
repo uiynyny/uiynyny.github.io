@@ -347,6 +347,10 @@ Memory protection is part of translation form virutal to physical address (MMU)
   - both segmentation and paging
   - memory protection bit indicate no access, read/write access or read-only access
   - No execute bit
+## Access control
+- **check every access** : OS might fail to notice access has been revoked
+- **enforce last privilege** : grant program access only to smallest number of object required to perform a task
+- **verify acceptable use** : limit type of activity that can be performed on an object
 
 ## Access control matrix
 - access control list
