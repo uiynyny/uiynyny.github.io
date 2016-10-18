@@ -3,7 +3,7 @@
 - Confidentiality:
   - Access to systems or data is limited to authorized parties
 - Integrity:
-  - You get "right data when asking
+  - You get "right" data when asking
 - Availability:
   - The system or data is there when you want it
 - Privacy:
@@ -16,9 +16,9 @@
 4. Fabrication
 
 ### Defence
-1. Prenvent it:
+1. Prevent it:
   - prevent the attack
-2. deter it:
+2. Deter it:
   - make attack harder more expensive
 3. Deflect it:
   - make youtself less attractive
@@ -62,7 +62,7 @@ Hard to write secure programs:
 
 Flaw: **faults** and **failures**  
   1. *patching*
-    - causing a narrow focus on oberved failure, instead of a broad look at what may be a more serious underlying problem
+    - causing a narrow focus on observed failure, instead of a broad look at what may be a more serious underlying problem
     - fault may have caused other unnoticed failures and partial fix may cause inconsistencies or other problems
     - may introduce new faults
   2. Fuzzing
@@ -87,6 +87,7 @@ Integer overflow: make signed integer wrap and become negative usually violate a
 - Non-executable stack (writable or executable)
 - stack at random virtual address
 - "Canaries" detect if stack has been overwritten
+
 ### Format String
 - %s likely crash program
 - %x dump the stack
@@ -107,6 +108,7 @@ Integer overflow: make signed integer wrap and become negative usually violate a
 
 ### TOCTTOU error
 The state of the system changed between the check for permission and the execution of the operation
+
 #### Defend TOCTTOU error
 - make sure all information relevant to teh access control decision is constant between the time of the check and the time of the action
 - keep a private copy of the request itself so the request can't be altered during the race
@@ -134,11 +136,13 @@ Spread by sharing infect file around or p2p network
 ### Trojan horse
 program claim to do something innocuous but hide malicious behavior which user want to run  
 Spread rely on multiple users executing the "trojaned" software  
-usually with scareware or ransomware inside  
+usually with scareware or ransomware inside
+
 ### Logic bomb
 malicious code hiding in the software already on computer  
 usually written by "insider" and meant to be triggered sometimes  
-has trigger respond to sepcific events  
+has trigger respond to sepcific events
+
 #### spoting Trojan & logic bomb
 tricky, since user is intentionally running the code and logic bomb is part of the software already install on the computer
 
