@@ -417,3 +417,6 @@ Different classes of authentication factors can be combined
 - Authentication: trait correspond to a particular trait
 - Identification: trait correspond to any stored trait
 - False positive make biometric-based identification useless
+- privacy : personal info may leak
+- accuracy : false negative
+- secrecy : face fingerprint not particualrly secret
