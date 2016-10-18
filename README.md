@@ -270,3 +270,88 @@ learn information about what the computer is doing by looking at:
 - organization have rules about how thing are done at each stage of software lifecycle (standards)
 - make formal processes specifying how each of these standards should be implemented
 - have audit comes in and verifies that processes properly
+
+# Module 3
+## Separation
+- Physical
+  - use different physical resource for different user
+  - easy to implement expensive and inefficient
+- Temporal
+  - execute different users' program at different time
+- Logical
+  - user is given impression no other user exists
+  - done by OS
+- Cryptographic
+  - Encrypt data make it unintelligible to outsiders
+  - complex
+
+## Sharing
+OS should allow flexible sharing
+
+## Memory and address
+prevent one program from corrupting other programs or data, OS  
+Memory protection is part of translation form virutal to physical address (MMU)
+
+- Fence register
+  - exception if memory access below address in fence
+  - protects OS from user program
+  - Single-user OS
+- Base/bound register
+  - Exception if memory access below/above address in base/bounds
+  - different values for each user program
+  - maintain by OS during context switch
+  - limited flexibility
+- Tagged architecture
+  - Each memory word has one or more extra bits identify access right to word
+  - flexible
+  - large overhead
+  - Difficult to port OS from/to other hardware architecture
+- Segmentation
+  - multiple address space (segments)
+  - Different segment for code, data and stack
+  - OS map from segment name to its base physical address in Segment Table
+  - keep protection attributes
+
+  **Advantages:**  
+  * Each address reference is checked for protection by hardware 
+  * Many different classes of data items can be assigned different levels of protection 
+  * Users can share access to a segment, with potentially different access rights
+  * Users cannot access an unpermitted segment
+
+  **Disadvantages**  
+  * External fragmentation 
+  * Dynamic length of segments requires costly out-of-bounds check for generated physical addresses 
+  * Segment names are difficult to implement efficiently
+
+- Paging
+  - program is divided into equal-sized chunks (pages)
+  - Physical memory is divided into equal-sized chunks (frames)
+  - Frame size = page size
+  - keep memory protection attribute
+
+  **Advantages:** 
+  * Each address reference is checked for protection by hardware 
+  * Users can share access to a page, with potentially different access rights 
+  * Users cannot access an unpermitted page 
+  * Unpopular pages can be moved to disk to free memory 
+
+  **Disadvantages:** 
+  * Internal fragmentation 
+  * Assigning different levels of protection to different classes of data items not feasible 
+
+- x86 architecture
+  - both segmentation and paging
+  - memory protection bit indicate no access, read/write access or read-only access
+  - No execute bit
+
+## Access control matrix
+- access control list
+  - column-wise
+  - each object has list of subjects and their right
+  - set of allowed user per object is quick
+- capabilities
+  - row-wise
+  - unforgeable token gives owner some access right to an object
+  - enforced by OS store and maintain tokens or cryptographic
+  - token are transferable
+  - combined usage of ACL and cap.
