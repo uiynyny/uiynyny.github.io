@@ -418,5 +418,191 @@ Different classes of authentication factors can be combined
 - Identification: trait correspond to any stored trait
 - False positive make biometric-based identification useless
 - privacy : personal info may leak
-- accuracy : false negative
+- accuracy : false negative e.g. growing beard, hurt finger
 - secrecy : face fingerprint not particualrly secret
+
+### Trusted OS
+Trust OS if we have confidence that it provide security service i.e: Memory and file protection, Access control and user authentication
+- **Policy** : set of rules outlining what is secured and why
+- **Model** : implements the policy and reasoning policy
+- **Design** : specification how OS implement model
+- **Trust** : assurance OS implemented according to design
+
+### Trusted Software
+rigorously developed and analyzed, giving reason to trust the code does what it is expected and nothing more. can change over time
+- **Functional correctness** : software work correctly
+- **Enforcement integrity** : wrong input don't impact correctness of data
+- **Limited privilege** : access rights are minimized and not passed to ohters
+- **Appropriate confidence level** : software has been rated as required by environment
+
+## Security policy
+subject/object has sensitivity level and assigned to one or more compartments
+  - _Need-to-know rule_
+
+### Chinese Wall security policy
+once you have been able to access information about a particular kind of company, you can not access information about other of the same kind
+- for consulting, legal or accounting firms
+- conflict of interest
+- ss-prop & \*-prop
+
+### Securiy model
+- Lattices
+  - transitive, antisymmetric
+  - unique lowest upper bound u>= a u>=b
+  - unique greatest lower bound a<=l b<=l
+- n\*2^m
+
+### Bell-La Padula confidentality model
+regulate information flow in MLS policy
+
+- information flow up
+- no read up no write down
+
+### Biba integrity model
+prevent inappropriate modification of data
+
+- information flow down
+- no write up no read down
+- low watermark property
+  - on subject / object
+
+### BLP & Biba
+- simple, possible to prove properties
+- too simple for great practical benefit
+- information leak may still be possible through covert channel in an implementation of model
+
+### Information flow control
+- describe authorized path along which information can flow
+- input of a program have a security classification associated
+- compiler goes through the program and update the security classification of each variable depending on the individual statements that update the variable (dynamic BLP/Biba)
+- security classification for each variable that is output by the program is computed
+- user/other program is allowed to see output only if allowed by user/program 's security classification
+
+## Design principle for security
+1. **Least privilege** : operate using fewest privilege possible
+2. **Economy of mechanism** : protection mechanism should be simple and straightforward
+3. **Open design** : avoid security by obsecurity e.g.  not secret algorithm
+4. **Complete mediation** : every access attempt must be checked
+5. **Permission based/ Fail-safe defaults** : default should be denial of access
+6. **Separation of privilege** : two or more condition must be met to get access
+7. **Least common mechanism** : shared mechanism could be used as a coovert channel
+8. **Ease of use** : if protectio nmechanism is difficult to use, nobody will use it or in wrong way
+
+## Blacklist vs whitelist
+make sure using the correct one
+
+## Security feature of trusted OS
+- identification and authenticaton
+
+### Access control
+- Mandatory access control
+  - central authority establishes who can access what
+  - good ofr military environment
+  - Chinese Wall, BLP, Biba
+- Discretionary access control
+  - owner of an object have control over who can access
+  - grant others access to your directory
+  - UNIX & Win
+- RBAC
+
+### Object reuse protection
+- OS should erase returned memory before handing out to others
+- Defensive programming : erase sensitive data yourself before return to OS
+- hidden data (deleted file, emails)
+
+### Complete mediation/trusted path
+- Compelte mediation
+  - all access must be checked
+  - preventing access to OS memory may not help if it is possible to access the swap space on disk
+- Trusted path
+  - give assurance to user that action are sent ot legitimate receiver application
+  - difficult for existing desktop environment
+
+### Accountability and audit
+- keep an audit log of all security-related events
+- provide accountability if something goes bad (e.g. who delete the record, how did intruder get into the system?)
+- lose meaning if atack can modify log
+- to a certain granularity (detail) for events be logged
+
+### Intrusion detection
+- correlating actual behavior with normal behavior alarm if behavior looks abnormal
+
+## Trusted computing base
+- part of a trusted OS to enforce OS sercurity policy
+- implemented either in different parts of the OS or in a separate security kernel
+- separate security kernel make it easy to validate and maintain security functionality
+- security kernel run below OS kernel more difficult to attack
+
+## Ring
+1. Hardware
+2. Security kernel
+  - access control
+  - authentication function
+3. Operatin System
+  - resource allocation
+  - sharing
+  - hardware interaction
+4. User task
+
+access only memory and instruction in rings >=n. access ring < n trigger interrupt/execption and inner ring will grant or deny access  
+x86 support 4 ring, linux and win use 2. research OS use more
+
+## Reference monitor
+- crucial part of TCB
+- collection of access control for devices, files, memory...
+- tamperproof, unbypassable, analyzable
+- interact with other security mechanism (user authentication)
+
+## Virtualization
+provide logical separation. 
+different degrees of virtualization
+
+- Virtual memory
+  - page mapping give each process impression of haveing separate memory space
+- Virtual machine
+  - virtualize I/O devices, files, printers
+  - rootkit could make OS run in virtual environment and difficult to detect
+
+## Application insulation
+- memory encryption allow application shielding form others
+- partitioned into trusted and untrusted code
+- trusted code is encrypted in memory use key in secure hardware
+- untrusted code talks with trusted code via compat API
+- TCB is reduced to secure hardware, CPU and trusted code
+- SGX ADM memory encryption
+
+priviliege in popular OS are poor
+- windowsNT any user process can do anything
+- pre-vista: fine-grained access control but many user ran as admin
+- Vista: temporarilygain additional access right (UAC) integrity levels : IE in lowest.
+- UNIX: root can do anything, user has full access to user's data
+- SElinux AppArmor has MAC for linux : allow the least privilege
+
+### chroot
+sandbox by changing its root directory  
+cannot access file outside some are difficult to run
+
+### compartmentalization
+split application into parts and apply least privilege to each part  
+openSSH splits SSH daemon into a privileged monitor and an unprivileged child  
+child receive network data from clident might corrupted  
+child need contact monitor to get access to protected information  
+monitor shut down child if behavior suspicious
+
+### setuid
+ACLs contain an suid bit if executable suid bet is set, will execute under the identity of its owner not caller  
+make sure avoid 'confused deputy" attack
+
+### Assurance
+- Testing
+  - demonstrate existence of problem not absence
+  - infeasible to test all possibile input
+  - penetration testing
+- Formal verification
+  - mathmatical logic to prove correctness of OS
+  - OS grow faster in size than research advances
+- Validation
+  - SE method
+  - requirement checking, design and code reviews and system testing
+
+### Evaluation
