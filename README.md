@@ -606,3 +606,5 @@ make sure avoid 'confused deputy" attack
   - requirement checking, design and code reviews and system testing
 
 ### Evaluation
+- evaluate OS by trusted entity and certify for satisfied criteria
+- e.g. Orange Book, Common Criteria (more international effort have Protection Profiles)
