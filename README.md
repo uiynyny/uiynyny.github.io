@@ -16,16 +16,11 @@
 4. Fabrication
 
 ### Defence
-1. Prevent it:
-  - prevent the attack
-2. Deter it:
-  - make attack harder more expensive
-3. Deflect it:
-  - make youtself less attractive
-4. Detect it:
-  - notice attack is occurring
-5. Recover from it:
-  - mitigate the attack effects
+1. Prevent it: prevent the attack
+2. Deter it: make attack harder more expensive
+3. Deflect it: make youtself less attractive
+4. Detect it: notice attack is occurring
+5. Recover from it: mitigate the attack effects
   
 *principle of Easiest Penetration*:  system is only as strong as its weakest link  
 *principle of Adequate Protection*:  security is economics
@@ -242,7 +237,7 @@ learn information about what the computer is doing by looking at:
 - Static code analysis
   - software help find security flaws
 - Formal methods
-  - try to prove the code does excatly what is supposed to do
+  - try to prove the code does exactly what is supposed to do
   - have to  "mark up" code with assertions or other hints to the theorem proving program
 - Genetic diversity
   - many machines running the same vulnerable code
@@ -266,7 +261,7 @@ learn information about what the computer is doing by looking at:
 - make sure the implementation meets the specification
 - make program do unspecified things by doing unusual thing (more like black-box)
 - make program do unspecified things by taking into account the design and the implementation (white-box)
-- Black-box : test where you jsut have accessto a completed object (Fuzz test)
+- Black-box : test where you just have access to a completed object (Fuzz test)
 - White-box : test conformance to a specification by taking into account knowledge of the design and implementation (useful for regression testing)
 
 ### Security controls in Documentation
